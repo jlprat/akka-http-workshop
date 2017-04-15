@@ -1,251 +1,302 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Akka HTTP Workshop</title>
+    <title>Akka HTTP Workshop</title>
 
-        <meta name="description" content="Crash Course about Akka HTTP">
-        <meta name="author" content="Josep Prat">
-        <link rel="icon" href="images/favicon.ico">
+    <meta name="description" content="Crash Course about Akka HTTP">
+    <meta name="author" content="Josep Prat">
+    <link rel="icon" href="images/favicon.ico">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
+    <!-- Printing and PDF exports -->
+    <script>
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section data-markdown>
-					<script type="text/template">
-						# Akka HTTP
 
-						## Workshop about Akka HTTP
-						* * *
-						###### 24/04/2017 - Josep Prat - [@jlprat](https://github.com/jlprat)
-					</script>
-				</section>
-                <section data-markdown>
-                    <script type="text/template">
-                        # Contents
-                        - Introduction
-                        - Hands On with Demos
-                        - Code Together
-                        - Wrap Up
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
-                        # Contents
-                        - Introduction
-                         - What is it?
-                         - Word about Streams and Actors
-                         - Golden Rules
-                         - Hello World!
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
-                        # Contents
-                        - Hands On with Demos
-                         - Understanding the Model
-                         - Routes and Directives
-                         - Consuming HTTP
-                         - Deal with Rejections
-                         - Handling Exceptions
-                         - Dealing with blocking
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
-                        # Contents
-                        - Code Together
-                         - Book Store App
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
-                        # Contents
-                        - Wrap Up
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
-                        ## What is Akka HTTP?
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-markdown>
+            <script type="text/template">
+                # Akka HTTP
 
-                        - Toolkit rather than a framework
-                        - Not (much) opinionated
-                        - Producer and Consumer HTTP Services
-                        - Not a Web framework
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
-                        ## What is Akka HTTP?
+                ## Workshop about Akka HTTP
+                * * *
+                ###### 24/04/2017 - Josep Prat - [@jlprat](https://github.com/jlprat)
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                # Contents
+                - Introduction
+                - Hands On with Demos
+                - Code Together
+                - Wrap Up
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                # Contents
+                - Introduction
+                    - What is it?
+                    - Word about Streams and Actors
+                    - Golden Rules
+                    - Hello World!
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                # Contents
+                - Hands On with Demos
+                    - Understanding the Model
+                    - Routes and Directives
+                    - Consuming HTTP
+                    - Deal with Rejections
+                    - Handling Exceptions
+                    - Dealing with blocking
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                # Contents
+                - Code Together
+                    - Book Store App
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                # Contents
+                - Wrap Up
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## What is Akka HTTP?
 
-                        Used to be a module of [Akka](http://akka.io/), now it lives under its own [repository](https://github.com/akka/akka-http).
-                        It can be seen as the successor of [Spray](http://spray.io/).
+                - Toolkit rather than a framework
+                - Not (much) opinionated
+                - Producer and Consumer HTTP Services
+                - Not a Web framework
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## What is Akka HTTP?
 
-                        Interestingly, Akka HTTP is owned by the community and not only by the Akka Core Team, see [Akka HTTP Team](https://github.com/akka/akka-meta/issues/27).
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
-                        ## Philosophy
+                Used to be a module of [Akka](http://akka.io/), now it lives under its own [repository](https://github.com/akka/akka-http).
+                It can be seen as the successor of [Spray](http://spray.io/).
 
-                        Akka HTTP is build on top of Akka Streams, which rely on Akka actors. For this reason, one must follow
-                        the same rules as in Akka, never block.
+                Interestingly, Akka HTTP is owned by the community and not only by the Akka Core Team, see [Akka HTTP Team](https://github.com/akka/akka-meta/issues/27).
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Philosophy
 
-                        An HTTP server it's just a byte stream sourcing from a `Request` and sinking to a `Response`.
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
-                        ## Word about Actors
+                Akka HTTP is build on top of Akka Streams, which rely on Akka actors. For this reason, one must follow
+                the same rules as in Akka, never block.
 
-                        - Message-based
-                        - "Single-threaded"
-                        - Non-blocking
-                        - General purpose
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
-                        ## Word about Streams
+                An HTTP server it's just a byte stream sourcing from a `Request` and sinking to a `Response`.
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Word about Actors
 
-                        - Built on top of Actors
-                        - Unbounded data
-                        - Source -> Flow -> Sink
-                        - Back pressure
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
-                        ## Golden Rules
+                - Message-based
+                - "Single-threaded"
+                - Non-blocking
+                - General purpose
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Word about Streams
 
-                        - Never block
-                        - Never block
-                        - Never block
-                        - If you must, block in another Thread Pool
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
-                        ## Hello World!
+                - Built on top of Actors
+                - Unbounded data
+                - Source -> Flow -> Sink
+                - Back pressure
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Golden Rules
 
-                        ```
-                        new HttpApp {
-                          override protected def route: Route = path("hello") {
-                            complete("world!")
-                          }
-                        }.startServer("localhost", 9000)
-                        ```
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+                - Never block
+                - Never block
+                - Never block
+                - If you must, block in another Thread Pool
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Hello World!
 
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+                ```
+                new HttpApp {
+                  override protected def route: Route = path("hello") {
+                    complete("world!")
+                  }
+                }.startServer("localhost", 9000)
+                ```
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                # Hands On
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Understanding the Model
 
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+                ### HttpRequest:
+                - Method
+                - Uri
+                - Headers
+                - Entity
+                - Protocol
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Understanding the Model
 
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+                ### HttpResponse:
+                - Status Code
+                - Headers
+                - Entity
+                - Protocol
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Understanding the Model
 
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+                ### Entity:
+                - Data Bytes
+                - Content Type
+                - Content Length (if known)
 
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+                Due to the streaming nature of Akka HTTP, there are different kinds of Entities.
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Understanding the Model
+                - Strict
+                   - All bytes in memory
+                    - Entity is small
+                - Default
+                    - Streamed
+                    - Data comes from Stream and length is known
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Understanding the Model
+                - Chunked
+                  - Streamed as chunks
+                    - Data comes in chunks from Stream and length is unkown
+                - CloseDelimited
+                    - Streamed implicitly delimited by closing the connection
+                    - Use for legacy systems
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Understanding the Model
+                - IndefiniteLength
+                    - Streamed
+                    - To use in `Multipart.Bodypart` and unknown length
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
 
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
 
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
 
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
 
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
 
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
 
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
 
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
 
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
 
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
 
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
 
-                    </script>
-                </section>
-                <section data-markdown>
-                    <script type="text/template">
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
 
-                    </script>
-                </section>
-            </div>
-		</div>
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+            </script>
+        </section>
+    </div>
+</div>
 
-		<script>
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				history: true,
@@ -259,6 +310,7 @@
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
-		</script>
-	</body>
+
+</script>
+</body>
 </html>
