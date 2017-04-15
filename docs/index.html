@@ -83,37 +83,75 @@
                 </section>
                 <section data-markdown>
                     <script type="text/template">
+                        ## What is Akka HTTP?
 
+                        - Toolkit rather than a framework
+                        - Not (much) opinionated
+                        - Producer and Consumer HTTP Services
+                        - Not a Web framework
                     </script>
                 </section>
                 <section data-markdown>
                     <script type="text/template">
+                        ## What is Akka HTTP?
 
+                        Used to be a module of [Akka](http://akka.io/), now it lives under its own [repository](https://github.com/akka/akka-http).
+                        It can be seen as the successor of [Spray](http://spray.io/).
+
+                        Interestingly, Akka HTTP is owned by the community and not only by the Akka Core Team, see [Akka HTTP Team](https://github.com/akka/akka-meta/issues/27).
                     </script>
                 </section>
                 <section data-markdown>
                     <script type="text/template">
+                        ## Philosophy
 
+                        Akka HTTP is build on top of Akka Streams, which rely on Akka actors. For this reason, one must follow
+                        the same rules as in Akka, never block.
+
+                        An HTTP server it's just a byte stream sourcing from a `Request` and sinking to a `Response`.
                     </script>
                 </section>
                 <section data-markdown>
                     <script type="text/template">
+                        ## Word about Actors
 
+                        - Message-based
+                        - "Single-threaded"
+                        - Non-blocking
+                        - General purpose
                     </script>
                 </section>
                 <section data-markdown>
                     <script type="text/template">
+                        ## Word about Streams
 
+                        - Built on top of Actors
+                        - Unbounded data
+                        - Source -> Flow -> Sink
+                        - Back pressure
                     </script>
                 </section>
                 <section data-markdown>
                     <script type="text/template">
+                        ## Golden Rules
 
+                        - Never block
+                        - Never block
+                        - Never block
+                        - If you must, block in another Thread Pool
                     </script>
                 </section>
                 <section data-markdown>
                     <script type="text/template">
+                        ## Hello World!
 
+                        ```
+                        new HttpApp {
+                          override protected def route: Route = path("hello") {
+                            complete("world!")
+                          }
+                        }.startServer("localhost", 9000)
+                        ```
                     </script>
                 </section>
                 <section data-markdown>
