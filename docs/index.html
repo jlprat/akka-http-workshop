@@ -296,6 +296,11 @@
         </section>
         <section data-markdown>
             <script type="text/template">
+                ## Hands on!
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
                 ## Consuming HTTP
 
                 Akka HTTP comes also with a stream-first client to consume HTTP based services. The easiest (for me) mode to use the client
@@ -320,17 +325,38 @@
             <script type="text/template">
                 ## Deal with Rejections
 
-
+                When a route can't be handled, a rejection is produced. This doesn't necessarily mean the request will be unhandled,
+                Akka HTTP will try with the next route.
             </script>
         </section>
         <section data-markdown>
             <script type="text/template">
+                ## Deal with Rejections
 
+                ```
+                val route = path("foo") {
+                  get {
+                    complete("get foo")
+                  } ~
+                  post {
+                    complete("post foo")
+                  }
+                }
+                ```
             </script>
         </section>
         <section data-markdown>
             <script type="text/template">
+                ## Personalizing Rejections
 
+                In the case you want to handle specific rejections in a different way, one just needs to create its own
+                `RejectionHandler`. There is a default `RejectionHandler` that handles all Akka HTTP rejections (with
+                conventional defaults).
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Hands on!
             </script>
         </section>
         <section data-markdown>
