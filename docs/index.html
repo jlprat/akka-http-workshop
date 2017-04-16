@@ -183,71 +183,88 @@
                 - Protocol
             </script>
         </section>
-        <section data-markdown>
-            <script type="text/template">
-                ## Understanding the Model
+        <section>
+            <section data-markdown>
+                <script type="text/template">
+                    ## Understanding the Model
 
-                ### Entity:
-                - Data Bytes
-                - Content Type
-                - Content Length (if known)
+                    ### Entity:
+                    - Data Bytes
+                    - Content Type
+                    - Content Length (if known)
 
-                Due to the streaming nature of Akka HTTP, there are different kinds of Entities.
-            </script>
-        </section>
-        <section data-markdown>
-            <script type="text/template">
-                ## Understanding the Model
-                - Strict
-                   - All bytes in memory
+                    Due to the streaming nature of Akka HTTP, there are different kinds of Entities.
+                </script>
+            </section>
+            <section data-markdown>
+                <script type="text/template">
+                    ## Understanding the Model
+                    - Strict
+                    - All bytes in memory
                     - Entity is small
-                - Default
+                    - Default
                     - Streamed
                     - Data comes from Stream and length is known
-            </script>
-        </section>
-        <section data-markdown>
-            <script type="text/template">
-                ## Understanding the Model
-                - Chunked
-                  - Streamed as chunks
+                </script>
+            </section>
+            <section data-markdown>
+                <script type="text/template">
+                    ## Understanding the Model
+                    - Chunked
+                    - Streamed as chunks
                     - Data comes in chunks from Stream and length is unkown
-                - CloseDelimited
+                    - CloseDelimited
                     - Streamed implicitly delimited by closing the connection
                     - Use for legacy systems
-            </script>
-        </section>
-        <section data-markdown>
-            <script type="text/template">
-                ## Understanding the Model
-                - IndefiniteLength
+                </script>
+            </section>
+            <section data-markdown>
+                <script type="text/template">
+                    ## Understanding the Model
+                    - IndefiniteLength
                     - Streamed
                     - To use in `Multipart.Bodypart` and unknown length
+                </script>
+            </section>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Routes and Directives
+
+                Routes are the central part of the Routing DSL, they process Requests and produce Responses (any kind of Responses).
+                The `Route` type is an alias for `RequestContext => Future[RouteResult]`.
             </script>
         </section>
         <section data-markdown>
             <script type="text/template">
+                ## Routes and Directives
 
+                Directives are the building blocks for creating Routes. They wrap the functionality of its inner route and
+                apply some transformations on the `Request` or the `Response`.
             </script>
         </section>
         <section data-markdown>
             <script type="text/template">
+                ## Routes and Directives
 
+                Types of Directives:
+                - Transforming: They modify the request before passing it to its inner route.
+                - Filtering: They only pass requests that satisfy certain conditions and reject the others.
+                - Extracting: They provide some value to its inner route or reject otherwise.
+                - Completing: They complete a request (successfully or not).
             </script>
         </section>
         <section data-markdown>
             <script type="text/template">
+                ## Composing Directives 101
 
+                - Nesting
+                - Side-by-side (`Route.concat` or `~` || `orElse` or `RouteDirectives.route`)
             </script>
         </section>
         <section data-markdown>
             <script type="text/template">
-
-            </script>
-        </section>
-        <section data-markdown>
-            <script type="text/template">
-
+                ## Hands On!
             </script>
         </section>
         <section data-markdown>
