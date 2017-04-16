@@ -63,6 +63,7 @@
                 - Hands On with Demos
                     - Understanding the Model
                     - Routes and Directives
+                    - Path Matchers
                     - Consuming HTTP
                     - Deal with Rejections
                     - Handling Exceptions
@@ -100,6 +101,16 @@
                 It can be seen as the successor of [Spray](http://spray.io/).
 
                 Interestingly, Akka HTTP is owned by the community and not only by the Akka Core Team, see [Akka HTTP Team](https://github.com/akka/akka-meta/issues/27).
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Useful Links
+
+                [Github](https://github.com/akka/akka-http)
+                [Documentation](http://doc.akka.io/docs/akka-http/10.0.5/index.html)
+                [Gitter Room](https://gitter.im/akka/akka/)
+                [User Group](https://groups.google.com/forum/#!forum/akka-user)
             </script>
         </section>
         <section data-markdown>
@@ -248,10 +259,10 @@
                 ## Routes and Directives
 
                 Types of Directives:
-                - Transforming: They modify the request before passing it to its inner route.
-                - Filtering: They only pass requests that satisfy certain conditions and reject the others.
-                - Extracting: They provide some value to its inner route or reject otherwise.
-                - Completing: They complete a request (successfully or not).
+                - Transforming: They modify the request before passing it to its inner route
+                - Filtering: They only pass requests that satisfy certain conditions and reject the others
+                - Extracting: They provide some value to its inner route or reject otherwise
+                - Completing: They complete a request (successfully or not)
             </script>
         </section>
         <section data-markdown>
@@ -265,25 +276,50 @@
         <section data-markdown>
             <script type="text/template">
                 ## Hands On!
-            </script>
-        </section>
-        <section data-markdown>
-            <script type="text/template">
 
-            </script>
-        </section>
-        <section data-markdown>
-            <script type="text/template">
+                [Directives By Trait:Scala](http://doc.akka.io/docs/akka-http/current/scala/http/routing-dsl/directives/by-trait.html)
 
+                [Directives By Trait:Java](http://doc.akka.io/docs/akka-http/current/java/http/routing-dsl/directives/by-trait.html)
             </script>
         </section>
         <section data-markdown>
             <script type="text/template">
+                ## Path Matchers
 
+                Path directives can be used to match against simple strings, or complex matchers that will extract the matched value.
+                Useful ones:
+                - `Segment`
+                - `IntNumber`, `LongNumber`...
+                - `PathEnd`
+                - "foo" / "bar" (obviously only in Scala)
             </script>
         </section>
         <section data-markdown>
             <script type="text/template">
+                ## Consuming HTTP
+
+                Akka HTTP comes also with a stream-first client to consume HTTP based services. The easiest (for me) mode to use the client
+                is the `Future` based one. It turns an `HttpRequest` into a `Future[HttpResponse]`.
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Consuming HTTP
+
+                Example
+                ```
+                implicit val system = ActorSystem()
+                implicit val materializer = ActorMaterializer()
+
+                val responseFuture: Future[HttpResponse] =
+                  Http().singleRequest(HttpRequest(uri = "http://akka.io"))
+                ```
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Deal with Rejections
+
 
             </script>
         </section>
