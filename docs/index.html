@@ -356,17 +356,68 @@
         </section>
         <section data-markdown>
             <script type="text/template">
+                ## Handling Exceptions
+
+                Sometimes your business code encounters some unexpected problems and must throw an Exception. Akka HTTP has the
+                possibility to handle any exception occurred while processing a route, one just needs to create its own
+                `ExceptionHandler`.
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
                 ## Hands on!
             </script>
         </section>
         <section data-markdown>
             <script type="text/template">
+                ## Dealing with Blocking
 
+                Blocking operations are really bad, especially when using Akka HTTP (or any other Akka library) because they block
+                the same `Dispatcher` that is used to process the incoming requests. This means, your blocking code can
+                bring down your whole Server.
             </script>
         </section>
         <section data-markdown>
             <script type="text/template">
+                ## Dealing with Blocking
 
+                But, what to do when blocking is necessary? You need to provide a dedicated `Dispatcher` for such blocking
+                calls and wrap then inside a `Future` (that uses the mentioned `Dispatcher`). This way, the main `Dispatcher`
+                is always ready to handle the incoming requests.
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Hands on!
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Book Store App
+
+                Let's build a tiny simplistic Book Store.
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Wrap Up
+
+                - Not a web framework
+                - Never block
+                - Ideal for Streaming
+                - Natural Actor integration
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                # Questions?
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                # Thank you!
+                * * *
+                ###### 24/04/2017 - Josep Prat - [@jlprat](https://github.com/jlprat)
             </script>
         </section>
     </div>
