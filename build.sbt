@@ -10,6 +10,9 @@ libraryDependencies ++= Seq(
   // akka http
   "com.typesafe.akka" %% "akka-http"         % akkaHttpVersion,
 
+  // ftp
+  "commons-net"        % "commons-net"       % "3.6",
+
   // testing
   "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpVersion % "test",
   "org.scalatest"     %% "scalatest"         % "3.0.1"     % "test",
