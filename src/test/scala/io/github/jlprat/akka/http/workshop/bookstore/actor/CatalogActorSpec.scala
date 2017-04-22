@@ -45,6 +45,12 @@ class CatalogActorSpec extends TestKit(ActorSystem("CatalogActorSpec"))
     expectMsg(BookInfo(book))
   }
 
+  it should "respond with error to book queries when book is unknown" in {
+    val catalogActor = system.actorOf(CatalogActor.props)
+    catalogActor ! QueryBook("non existing")
+    expectMsg(Error(s"I don't know such isbn - non existing"))
+  }
+
   it should "list all the catalog" in {
     val catalogActor = system.actorOf(CatalogActor.props)
     val book1 = Book("1234567", "The art of Doe", 321, Author("Jane Doe"))

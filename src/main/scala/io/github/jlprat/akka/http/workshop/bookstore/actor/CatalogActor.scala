@@ -42,6 +42,10 @@ class CatalogActor extends Actor with ActorLogging {
       sender() ! Error(msg)
     case QueryBook(isbn) if catalog.contains(isbn) =>
       sender() ! BookInfo(catalog(isbn))
+    case QueryBook(isbn) =>
+      val msg = s"I don't know such isbn - $isbn"
+      log.error(msg)
+      sender() ! Error(msg)
     case ListCatalog =>
       sender() ! Catalog(catalog.values.toSet)
   }
