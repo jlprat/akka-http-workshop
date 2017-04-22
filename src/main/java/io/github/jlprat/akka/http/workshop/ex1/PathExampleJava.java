@@ -19,7 +19,8 @@ public class PathExampleJava extends HttpApp {
           pathEndOrSingleSlash(() -> complete("got foo")),
           path("bar", () -> complete("got bar"))
         )),
-      path("other", () -> complete("OK")
+      get(() ->
+          path("other", () -> complete("OK"))
       )
     );
   }

@@ -49,4 +49,10 @@ class PathExampleSpec extends FlatSpec with ScalatestRouteTest with Matchers {
       status shouldBe StatusCodes.OK
     }
   }
+
+  it should "serve other top level routes like `/other` but only if they are GET" in {
+    Post("/other") ~> routeToTest ~> check {
+      handled shouldBe false
+    }
+  }
 }

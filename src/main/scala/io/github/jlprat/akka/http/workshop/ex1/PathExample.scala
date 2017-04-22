@@ -14,8 +14,10 @@ class PathExample extends HttpApp {
     path("bar") {
       complete("got bar")
     }
-  } ~ path("other") {
-    complete("OK")
+  } ~ get {
+    path("other") {
+      complete("OK")
+    }
   }
 }
 

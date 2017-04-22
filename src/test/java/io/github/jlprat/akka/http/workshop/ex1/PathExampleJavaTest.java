@@ -41,6 +41,12 @@ public class PathExampleJavaTest extends JUnitRouteTest {
   }
 
   @Test
+  public void testListenToOtherRoutesOnlyOnGet() {
+    testRoute(routeHolder.route()).run(HttpRequest.POST("/other"))
+            .assertStatusCode(StatusCodes.METHOD_NOT_ALLOWED);
+  }
+
+  @Test
   public void testRespondNotFound() {
     testRoute(routeHolder.route()).run(HttpRequest.GET("/notExisting"))
       .assertStatusCode(StatusCodes.NOT_FOUND);
