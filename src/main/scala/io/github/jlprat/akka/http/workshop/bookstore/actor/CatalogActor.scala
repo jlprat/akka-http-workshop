@@ -10,7 +10,6 @@ object CatalogActor {
   // incoming
   case class AddBook(book: Book) extends Messages
   case class RemoveBook(book: Book) extends Messages
-  case class UpdateBook(book: Book) extends Messages
   case class QueryBook(isbn: String) extends Messages
   case object ListCatalog extends Messages
 
@@ -34,13 +33,6 @@ class CatalogActor extends Actor with ActorLogging {
     case AddBook(book) =>
       sender() ! Success
       context.become(handleCatalog(catalog + (book.isbn -> book)))
-    case UpdateBook(book) if catalog.contains(book.isbn) =>
-      sender() ! Success
-      context.become(handleCatalog(catalog + (book.isbn -> book)))
-    case UpdateBook(book) =>
-      val msg = s"I don't know such book - $book"
-      log.error(msg)
-      sender() ! Error(msg)
     case RemoveBook(book) if catalog.contains(book.isbn) =>
       sender() ! Success
       context.become(handleCatalog(catalog - book.isbn))

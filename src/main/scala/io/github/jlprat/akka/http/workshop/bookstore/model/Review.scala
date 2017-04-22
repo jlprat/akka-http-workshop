@@ -18,4 +18,4 @@ object Review {
 
 }
 
-case class Review(author: Author, date: Date, comment: String, stars: Stars)
+case class Review(author: Author, date: Date = new Date(), comment: String, stars: Stars)
