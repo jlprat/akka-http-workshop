@@ -17,14 +17,14 @@ trait CatalogRoutes extends Directives with JsonProtocol {
 
   val catalogActorRef: ActorRef
 
-  implicit val timeout: Timeout = 300.millis
+  implicit val timeout: Timeout
 
   val catalogRoutes: Route = pathPrefix("catalog") {
     (get & pathEndOrSingleSlash) {
       val eventualCatalog = (catalogActorRef ? ListCatalog).mapTo[Catalog]
       complete(eventualCatalog)
     } ~
-      (get & path(Segment)) { isbn =>
+      (get & path("book" / Segment)) { isbn =>
         val eventualBookInfo = catalogActorRef ? QueryBook(isbn)
         onComplete(eventualBookInfo) {
           case Success(BookInfo(book)) => complete(book)

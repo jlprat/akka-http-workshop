@@ -27,15 +27,15 @@ object CatalogActor {
   */
 class CatalogActor extends Actor with ActorLogging {
 
-  override def receive: Receive = handleCatalog(Map.empty)
+  var catalog: Map[String, Book] = Map.empty
 
-  def handleCatalog(catalog: Map[String, Book]): Receive = {
+  override def receive: Receive = {
     case AddBook(book) =>
+      catalog = catalog + (book.isbn -> book)
       sender() ! Success
-      context.become(handleCatalog(catalog + (book.isbn -> book)))
     case RemoveBook(book) if catalog.contains(book.isbn) =>
+      catalog = catalog - book.isbn
       sender() ! Success
-      context.become(handleCatalog(catalog - book.isbn))
     case RemoveBook(book) =>
       val msg = s"I don't know such book - $book"
       log.error(msg)
