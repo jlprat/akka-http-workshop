@@ -7,7 +7,6 @@ import akka.http.scaladsl.server.{Directives, Route}
 import akka.util.Timeout
 import io.github.jlprat.akka.http.workshop.bookstore.actor.CatalogActor._
 
-import scala.concurrent.duration._
 import scala.util.{Failure, Success}
 
 /**
