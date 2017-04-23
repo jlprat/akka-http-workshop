@@ -88,4 +88,17 @@ class ReviewRoutesSpec extends FlatSpec with ScalatestRouteTest with Matchers {
       }
   }
 
+  it should "reject and return a 404 if the book doesn't exist" in new Fixture {
+    Get(s"/review/book/${book.isbn}/") ~> Route.seal(reviewRoutes) ~> check {
+      status shouldBe StatusCodes.NotFound
+    }
+
+    Put(s"/review/book/${book.isbn}/", FormData("comment" -> "It was awesome!", "stars" -> "5")) ~>
+      addCredentials(validCredentials) ~>
+      reviewRoutes ~>
+      check {
+        status shouldBe StatusCodes.NotFound
+      }
+  }
+
 }

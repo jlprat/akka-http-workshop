@@ -5,7 +5,7 @@ import akka.http.scaladsl.server.{HttpApp, Route}
 import akka.http.scaladsl.settings.ServerSettings
 import akka.util.Timeout
 import io.github.jlprat.akka.http.workshop.bookstore.actor.{CatalogActor, ReviewerActor}
-import io.github.jlprat.akka.http.workshop.bookstore.routes.{CatalogManagerRoutes, CatalogRoutes}
+import io.github.jlprat.akka.http.workshop.bookstore.routes.{CatalogManagerRoutes, CatalogRoutes, ReviewRoutes}
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
@@ -22,11 +22,12 @@ object BookShopApp extends App {
   Await.result(system.terminate(), 10.seconds)
 }
 
-class BookShopHttp(override val catalogActorRef: ActorRef, reviewerActorRef: ActorRef)
+class BookShopHttp(override val catalogActorRef: ActorRef, override val reviewerActorRef: ActorRef)
   extends HttpApp
     with CatalogRoutes
-    with CatalogManagerRoutes {
+    with CatalogManagerRoutes
+    with ReviewRoutes {
   override implicit val timeout: Timeout = 300.millis
 
-  override protected def route: Route = catalogRoutes ~ catalogManagerRoutes
+  override protected def route: Route = catalogRoutes ~ catalogManagerRoutes ~ reviewRoutes
 }

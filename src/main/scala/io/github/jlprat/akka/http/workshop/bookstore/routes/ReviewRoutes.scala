@@ -1,10 +1,11 @@
 package io.github.jlprat.akka.http.workshop.bookstore.routes
 
 import akka.actor.ActorRef
+import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.server.{Directives, Route}
 import akka.pattern.ask
 import akka.util.Timeout
-import io.github.jlprat.akka.http.workshop.bookstore.actor.CatalogActor.{BookInfo, QueryBook}
+import io.github.jlprat.akka.http.workshop.bookstore.actor.CatalogActor.{BookInfo, Error, QueryBook}
 import io.github.jlprat.akka.http.workshop.bookstore.actor.ReviewerActor.{AddReview, ListReviews, Reviews}
 import io.github.jlprat.akka.http.workshop.bookstore.model.Review.Stars
 import io.github.jlprat.akka.http.workshop.bookstore.model.{Author, Review}
@@ -31,6 +32,7 @@ trait ReviewRoutes extends Directives with JsonProtocol with Authentication {
             case Success(reviews) => complete(reviews)
             case Failure(ex) => failWith(ex)
           }
+        case Success(Error(msg)) => complete(StatusCodes.NotFound, "msg")
         case Failure(ex) => failWith(ex)
       }
     } ~
@@ -46,6 +48,7 @@ trait ReviewRoutes extends Directives with JsonProtocol with Authentication {
                   case Success(_) => complete("OK")
                   case Failure(ex) => failWith(ex)
                 }
+              case Success(Error(msg)) => complete(StatusCodes.NotFound, "msg")
               case Failure(ex) => failWith(ex)
             }
           }
