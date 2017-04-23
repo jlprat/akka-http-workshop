@@ -10,6 +10,7 @@ libraryDependencies ++= Seq(
   // akka http
   "com.typesafe.akka" %% "akka-http"            % akkaHttpVersion,
   "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpVersion,
+  "com.typesafe.akka" %% "akka-http-jackson"    % akkaHttpVersion,
 
   // ftp
   "commons-net"        % "commons-net"          % "3.6",

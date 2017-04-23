@@ -33,6 +33,24 @@ public class ReviewerActor extends AbstractActor {
         public Book getBook() {
             return book;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            AddReview addReview = (AddReview) o;
+
+            if (review != null ? !review.equals(addReview.review) : addReview.review != null) return false;
+            return book != null ? book.equals(addReview.book) : addReview.book == null;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = review != null ? review.hashCode() : 0;
+            result = 31 * result + (book != null ? book.hashCode() : 0);
+            return result;
+        }
     }
 
     public static class ListReviews {
@@ -44,6 +62,21 @@ public class ReviewerActor extends AbstractActor {
 
         public Book getBook() {
             return book;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            ListReviews that = (ListReviews) o;
+
+            return book != null ? book.equals(that.book) : that.book == null;
+        }
+
+        @Override
+        public int hashCode() {
+            return book != null ? book.hashCode() : 0;
         }
     }
 
@@ -57,9 +90,30 @@ public class ReviewerActor extends AbstractActor {
         public Collection<Review> getReviews() {
             return reviews;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Reviews reviews1 = (Reviews) o;
+
+            return reviews != null ? reviews.equals(reviews1.reviews) : reviews1.reviews == null;
+        }
+
+        @Override
+        public int hashCode() {
+            return reviews != null ? reviews.hashCode() : 0;
+        }
     }
 
     public static class Success {
+        private static Success success = null;
+
+        public static Success getInstance() {
+            if (success == null) success = new Success();
+            return success;
+        }
     }
 
     public static Props props() {

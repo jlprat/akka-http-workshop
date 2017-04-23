@@ -18,7 +18,7 @@ public class CatalogActor extends AbstractActor {
 
     private final LoggingAdapter log = Logging.getLogger(getContext().system(), this);
 
-    private Map<String, Book> catalog = new HashMap<>();
+    public Map<String, Book> catalog = new HashMap<>();
 
     static public class AddBook {
         private final Book book;
@@ -29,6 +29,21 @@ public class CatalogActor extends AbstractActor {
 
         public Book getBook() {
             return book;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            AddBook addBook = (AddBook) o;
+
+            return book != null ? book.equals(addBook.book) : addBook.book == null;
+        }
+
+        @Override
+        public int hashCode() {
+            return book != null ? book.hashCode() : 0;
         }
     }
 
@@ -42,6 +57,21 @@ public class CatalogActor extends AbstractActor {
         public Book getBook() {
             return book;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            RemoveBook that = (RemoveBook) o;
+
+            return book != null ? book.equals(that.book) : that.book == null;
+        }
+
+        @Override
+        public int hashCode() {
+            return book != null ? book.hashCode() : 0;
+        }
     }
 
     static public class QueryBook {
@@ -53,6 +83,21 @@ public class CatalogActor extends AbstractActor {
 
         public String getIsbn() {
             return isbn;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            QueryBook queryBook = (QueryBook) o;
+
+            return isbn != null ? isbn.equals(queryBook.isbn) : queryBook.isbn == null;
+        }
+
+        @Override
+        public int hashCode() {
+            return isbn != null ? isbn.hashCode() : 0;
         }
     }
 
@@ -69,6 +114,21 @@ public class CatalogActor extends AbstractActor {
         public Book getBook() {
             return book;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            BookInfo bookInfo = (BookInfo) o;
+
+            return book != null ? book.equals(bookInfo.book) : bookInfo.book == null;
+        }
+
+        @Override
+        public int hashCode() {
+            return book != null ? book.hashCode() : 0;
+        }
     }
 
     static public class Error {
@@ -81,9 +141,31 @@ public class CatalogActor extends AbstractActor {
         public String getMsg() {
             return msg;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Error error = (Error) o;
+
+            return msg != null ? msg.equals(error.msg) : error.msg == null;
+        }
+
+        @Override
+        public int hashCode() {
+            return msg != null ? msg.hashCode() : 0;
+        }
     }
 
     static public class Success {
+
+        private static Success success = null;
+
+        public static Success getInstance() {
+            if (success == null) success = new Success();
+            return success;
+        }
     }
 
     static public class Catalog {
@@ -96,6 +178,28 @@ public class CatalogActor extends AbstractActor {
         public Collection<Book> getBooks() {
             return books;
         }
+
+        @Override
+        public String toString() {
+            return "Catalog{" +
+                    "books=" + books +
+                    '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Catalog catalog = (Catalog) o;
+
+            return books != null ? books.equals(catalog.books) : catalog.books == null;
+        }
+
+        @Override
+        public int hashCode() {
+            return books != null ? books.hashCode() : 0;
+        }
     }
 
     public static Props props() {
@@ -106,11 +210,11 @@ public class CatalogActor extends AbstractActor {
         receive(ReceiveBuilder
                 .match(AddBook.class, addBook -> {
                     catalog.put(addBook.getBook().getIsbn(), addBook.getBook());
-                    sender().tell(new Success(), self());
+                    sender().tell(Success.getInstance(), self());
                 })
                 .match(RemoveBook.class, removeBook -> catalog.containsKey(removeBook.getBook().getIsbn()), removeBook -> {
                     catalog.remove(removeBook.getBook().getIsbn());
-                    sender().tell(new Success(), self());
+                    sender().tell(Success.getInstance(), self());
                 })
                 .match(RemoveBook.class, removeBook -> {
                     final String msg = "I don't know such book - " + removeBook.getBook().toString();
