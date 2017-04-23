@@ -1,6 +1,6 @@
 package io.github.jlprat.akka.http.workshop.ex1
 
-import akka.http.scaladsl.server.{ HttpApp, Route }
+import akka.http.scaladsl.server.{HttpApp, Route}
 
 /**
   * This class showcases some useful Path directives

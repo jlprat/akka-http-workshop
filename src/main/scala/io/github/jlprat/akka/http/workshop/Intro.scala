@@ -1,6 +1,6 @@
 package io.github.jlprat.akka.http.workshop
 
-import akka.http.scaladsl.server.{ HttpApp, Route }
+import akka.http.scaladsl.server.{HttpApp, Route}
 
 /**
   * Short server using [[HttpApp]] to help getting started

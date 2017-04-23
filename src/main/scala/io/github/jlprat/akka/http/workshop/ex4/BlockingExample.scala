@@ -1,14 +1,8 @@
 package io.github.jlprat.akka.http.workshop.ex4
 
-import java.io.BufferedInputStream
-import java.util.Scanner
-
 import akka.http.scaladsl.model.ContentTypes.`text/plain(UTF-8)`
 import akka.http.scaladsl.model.HttpEntity
-import akka.http.scaladsl.model.HttpEntity.Chunked
-import akka.http.scaladsl.model.MediaTypes.`application/pdf`
 import akka.http.scaladsl.server.{HttpApp, Route}
-import akka.stream.scaladsl.StreamConverters
 import org.apache.commons.net.ftp.FTPClient
 
 import scala.concurrent.Future
