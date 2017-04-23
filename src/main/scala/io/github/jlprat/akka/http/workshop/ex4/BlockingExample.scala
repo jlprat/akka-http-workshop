@@ -13,24 +13,7 @@ import scala.concurrent.Future
   */
 class BlockingExample extends HttpApp {
 
-  private implicit lazy val blockingDispatcher = systemReference.get.dispatchers.lookup("my-blocking-dispatcher")
-
-  override protected def route: Route = path("files") {
-    complete(
-      Future {
-        val ftp = new FTPClient
-        ftp.connect("ftp.fu-berlin.de")
-        ftp.login("anonymous", "")
-        ftp.changeWorkingDirectory("doc/o-reilly")
-        val files = ftp.listFiles()
-        ftp.disconnect()
-        HttpEntity(
-          `text/plain(UTF-8)`,
-          files.map(_.getName).mkString("\n")
-        )
-      }
-    )
-  }
+  override protected def route: Route = ???
 }
 
 object BlockingExample extends App {

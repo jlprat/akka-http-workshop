@@ -22,28 +22,7 @@ import java.util.concurrent.ExecutionException;
 public class BlockingExampleJava extends HttpApp {
     @Override
     protected Route route() {
-        final MessageDispatcher dispatcher = systemReference.get().dispatchers().lookup("my-blocking-dispatcher");
-
-        return path("files", () ->
-                completeWithFuture(
-                        CompletableFuture.supplyAsync(() -> {
-                            FTPClient ftp = new FTPClient();
-                            try {
-                                ftp.connect("ftp.fu-berlin.de");
-                                ftp.login("anonymous", "");
-                                ftp.changeWorkingDirectory("doc/o-reilly");
-                                final FTPFile[] ftpFiles = ftp.listFiles();
-                                final String content = Arrays.stream(ftpFiles)
-                                        .map(FTPFile::getName)
-                                        .reduce("", (a, b) -> a + "\n" + b);
-                                return HttpResponse.create().withEntity(HttpEntities.create(content));
-                            } catch (IOException e) {
-                                return HttpResponse.create().withStatus(StatusCodes.INTERNAL_SERVER_ERROR);
-                            }
-
-                        }, dispatcher)
-                )
-        );
+        return null;
     }
 
 

@@ -7,18 +7,7 @@ import akka.http.scaladsl.server.{HttpApp, Route}
   * Created by @jlprat on 19/04/2017.
   */
 class PathExample extends HttpApp {
-  override protected[ex1] def route: Route = pathPrefix("foo") {
-    pathEndOrSingleSlash {
-      complete("got foo")
-    } ~
-    path("bar") {
-      complete("got bar")
-    }
-  } ~ get {
-    path("other") {
-      complete("OK")
-    }
-  }
+  override protected[ex1] def route: Route = ???
 }
 
 object PathExample extends App {

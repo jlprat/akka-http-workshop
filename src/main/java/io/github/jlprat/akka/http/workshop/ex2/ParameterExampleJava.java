@@ -14,26 +14,7 @@ public class ParameterExampleJava extends HttpApp {
 
     @Override
     protected Route route() {
-        return route(
-                path("listen", () ->
-                        parameter("p1", p1 ->
-                                parameter("p2", p2 ->
-                                        complete("p1 -> " + p1 + ", p2 -> " + p2)
-                                )
-                        )
-                ),
-                path("opt", () ->
-                        parameterOptional("p1", p1 ->
-                                complete("p1 -> " + p1.orElse("unknown"))
-                        )
-                ),
-                path(PathMatchers.segment("buy").slash(PathMatchers.segment()), thing ->
-                        complete("You want to buy a " + thing)
-                ),
-                path(PathMatchers.segment("double").slash(PathMatchers.integerSegment()), number ->
-                        complete(Integer.toString(number * 2))
-                )
-        );
+        return null;
     }
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {

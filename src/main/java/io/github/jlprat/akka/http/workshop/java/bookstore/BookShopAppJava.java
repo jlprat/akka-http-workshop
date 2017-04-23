@@ -31,9 +31,7 @@ public class BookShopAppJava extends HttpApp {
 
     @Override
     protected Route route() {
-        return route(catalogManagerRoutes.catalogManagerRoutes(),
-                catalogRoutes.catalogRoutes(),
-                reviewRoutes.reviewRoutes());
+        return null;
     }
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {

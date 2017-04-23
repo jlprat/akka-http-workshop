@@ -13,9 +13,7 @@ public class IntroJava extends HttpApp {
 
   @Override
   protected Route route() {
-    return path("hello", () ->
-      complete("world!")
-    );
+    return null;
   }
 
   public static void main(String[] args) throws ExecutionException, InterruptedException {

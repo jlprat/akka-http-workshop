@@ -15,7 +15,7 @@ object BookShopApp extends App {
   val system = ActorSystem("BookShop")
   private val catalogActor = system.actorOf(CatalogActor.props)
   private val reviewerActor = system.actorOf(ReviewerActor.props)
-  private val bookShopHttp = new BookShopHttp(catalogActor, reviewerActor)
+  private val bookShopHttp = new BookShopHttp()
 
   bookShopHttp.startServer("localhost", 9000, ServerSettings(system), system)
 
@@ -25,12 +25,11 @@ object BookShopApp extends App {
 /**
   * Bootstraps the HTTP routes
   */
-class BookShopHttp(override val catalogActorRef: ActorRef, override val reviewerActorRef: ActorRef)
+class BookShopHttp
   extends HttpApp
     with CatalogRoutes
     with CatalogManagerRoutes
     with ReviewRoutes {
-  override implicit val timeout: Timeout = 300.millis
 
-  override protected def route: Route = catalogRoutes ~ catalogManagerRoutes ~ reviewRoutes
+  override protected def route: Route = ???
 }

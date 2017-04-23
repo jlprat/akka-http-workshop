@@ -11,10 +11,5 @@ import spray.json._
   * Provides support for JSON serialization
   */
 trait JsonProtocol extends SprayJsonSupport with DefaultJsonProtocol {
-  implicit val authorFormat = jsonFormat1(Author)
-  implicit val bookFormat = jsonFormat4(Book)
-  implicit val oneStartFormat = jsonFormat1(Stars.apply)
-  implicit val reviewFormat = jsonFormat4(Review.apply)
-  implicit val reviewsFormat = jsonFormat1(Reviews)
-  implicit val catalogFormat = jsonFormat1(Catalog)
+
 }

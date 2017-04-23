@@ -13,16 +13,7 @@ public class PathExampleJava extends HttpApp {
 
   @Override
   protected Route route() {
-    return route(
-      pathPrefix("foo", () ->
-        route(
-          pathEndOrSingleSlash(() -> complete("got foo")),
-          path("bar", () -> complete("got bar"))
-        )),
-      get(() ->
-          path("other", () -> complete("OK"))
-      )
-    );
+    return null;
   }
 
   public static void main(String[] args) throws ExecutionException, InterruptedException {

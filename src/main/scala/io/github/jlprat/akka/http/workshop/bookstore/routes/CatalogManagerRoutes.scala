@@ -15,41 +15,5 @@ import scala.util.{Failure, Success}
   */
 trait CatalogManagerRoutes extends Directives with JsonProtocol with Authentication {
 
-  val catalogActorRef: ActorRef
-
-  implicit val timeout: Timeout
-
-  private def authorize(username: String) = {
-    username.equalsIgnoreCase("admin")
-  }
-
-  val catalogManagerRoutes: Route = (pathPrefix("catalog" / "admin" / "book") &
-    pathEndOrSingleSlash &
-    (put | delete)) { //those are needed to provide the right feedback when no credentials are provided
-    authenticateBasic("book-realm", myUserPassAuthenticator) { username =>
-      authorize(authorize(username)) {
-        entity(as[Book]) { book =>
-          extractLog { log =>
-            put {
-              val result = catalogActorRef ? AddBook(book)
-              onComplete(result) {
-                case Success(CatalogActor.Success) => complete("OK")
-                case Failure(ex) => failWith(ex)
-              }
-            } ~
-              delete {
-                val result = catalogActorRef ? RemoveBook(book)
-                onComplete(result) {
-                  case Success(CatalogActor.Success) => complete("OK")
-                  case Success(CatalogActor.Error(msg)) =>
-                    log.info(s"Book ($book) was already removed!")
-                    complete("OK")
-                  case Failure(ex) => failWith(ex)
-                }
-              }
-          }
-        }
-      }
-    }
-  }
+  val catalogManagerRoutes: Route = ???
 }

@@ -14,22 +14,5 @@ import scala.util.{Failure, Success}
   */
 trait CatalogRoutes extends Directives with JsonProtocol {
 
-  val catalogActorRef: ActorRef
-
-  implicit val timeout: Timeout
-
-  val catalogRoutes: Route = pathPrefix("catalog") {
-    (get & pathEndOrSingleSlash) {
-      val eventualCatalog = (catalogActorRef ? ListCatalog).mapTo[Catalog]
-      complete(eventualCatalog)
-    } ~
-      (get & path("book" / Segment)) { isbn =>
-        val eventualBookInfo = catalogActorRef ? QueryBook(isbn)
-        onComplete(eventualBookInfo) {
-          case Success(BookInfo(book)) => complete(book)
-          case Success(Error(reason)) => complete(StatusCodes.NotFound, reason)
-          case Failure(ex) => failWith(ex)
-        }
-      }
-  }
+  val catalogRoutes: Route = ???
 }
