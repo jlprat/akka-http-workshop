@@ -19,9 +19,12 @@ object BookShopApp extends App {
 
   bookShopHttp.startServer("localhost", 9000, ServerSettings(system), system)
 
-  Await.result(system.terminate(), 10.seconds)
+  Await.result(system.terminate(), 2.seconds)
 }
 
+/**
+  * Bootstraps the HTTP routes
+  */
 class BookShopHttp(override val catalogActorRef: ActorRef, override val reviewerActorRef: ActorRef)
   extends HttpApp
     with CatalogRoutes
