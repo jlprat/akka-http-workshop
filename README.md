@@ -11,6 +11,8 @@ There are a total of 4 exercises focusing on different aspects of Akka HTTP:
 - Handling Rejections and Exceptions
 - How to deal with blocking code
 
+To run them switch to the `exercises` branch!
+
 ## Code Together
 Additionally to this, there is a hands-free exercise under the `bookstore` package.
  The main idea of this is to practice what has been learned during the workshop.
@@ -32,6 +34,8 @@ The application is layered in 3 packages:
  - model: That contains all model classes used in this project
  - routes: They hold the routes, but hold no business logic
  - actor: They hold the business logic of the application
+ 
+ Be careful, the code doesn't compile, you might need to provide some implicits under the `JsonProtocol` and some add some dependencies on the route files!
  
 ## How to run this code
 To run this code just head over the project main folder and run:
