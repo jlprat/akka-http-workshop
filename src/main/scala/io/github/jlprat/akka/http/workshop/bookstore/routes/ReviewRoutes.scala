@@ -19,6 +19,4 @@ trait ReviewRoutes extends Directives with JsonProtocol with Authentication {
 
   val reviewRoutes: Route = ???
 
-  }
-
 }
