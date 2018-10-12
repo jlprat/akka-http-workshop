@@ -13,20 +13,20 @@ class IntroSpec extends FlatSpec with ScalatestRouteTest with Matchers {
   val intro = new Intro
 
   "Intro" should "respond to GET requests to hello" in {
-    Get("/hello") ~> intro.route ~> check {
+    Get("/hello") ~> intro.routes ~> check {
       responseAs[String] shouldBe "world!"
       status shouldBe StatusCodes.OK
     }
   }
   it should "accept also POST" in {
-    Post("/hello") ~> intro.route ~> check {
+    Post("/hello") ~> intro.routes ~> check {
       responseAs[String] shouldBe "world!"
       status shouldBe StatusCodes.OK
     }
   }
 
   it should "accept also PUT" in {
-    Put("/hello") ~> intro.route ~> check {
+    Put("/hello") ~> intro.routes ~> check {
       responseAs[String] shouldBe "world!"
       status shouldBe StatusCodes.OK
     }

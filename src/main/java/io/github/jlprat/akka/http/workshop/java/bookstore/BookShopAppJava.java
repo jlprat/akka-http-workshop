@@ -30,7 +30,7 @@ public class BookShopAppJava extends HttpApp {
     }
 
     @Override
-    protected Route route() {
+    protected Route routes() {
         return null;
     }
 

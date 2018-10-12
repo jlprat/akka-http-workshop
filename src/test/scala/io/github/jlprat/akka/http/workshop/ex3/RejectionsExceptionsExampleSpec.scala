@@ -9,7 +9,7 @@ import org.scalatest.{FlatSpec, Matchers}
   */
 class RejectionsExceptionsExampleSpec extends FlatSpec with ScalatestRouteTest with Matchers {
 
-  private val routeToTest = new RejectionsExceptionsExample().route
+  private val routeToTest = new RejectionsExceptionsExample().routes
 
   "RejectionExceptionsExample" should "have a personalized message for 404" in {
     Get("/not/existing") ~> routeToTest ~> check {

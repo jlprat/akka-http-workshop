@@ -4,7 +4,6 @@ import akka.actor.AbstractActor;
 import akka.actor.Props;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
-import akka.japi.pf.ReceiveBuilder;
 import io.github.jlprat.akka.http.workshop.java.bookstore.model.Book;
 import io.github.jlprat.akka.http.workshop.java.bookstore.model.Review;
 
@@ -122,8 +121,9 @@ public class ReviewerActor extends AbstractActor {
 
     private Map<String, List<Review>> reviews = new HashMap<>();
 
-    public ReviewerActor() {
-        receive(ReceiveBuilder
+    @Override
+    public Receive createReceive() {
+        return receiveBuilder()
                 .match(AddReview.class, command -> {
                     final List<Review> bookReviews = reviews.getOrDefault(command.getBook().getIsbn(), new ArrayList<>());
                     bookReviews.add(command.getReview());
@@ -133,7 +133,7 @@ public class ReviewerActor extends AbstractActor {
                 .match(ListReviews.class, command -> {
                     sender().tell(reviews.getOrDefault(command.getBook().getIsbn(), new ArrayList<>()), self());
                 })
-                .build());
+                .build();
 
     }
 }

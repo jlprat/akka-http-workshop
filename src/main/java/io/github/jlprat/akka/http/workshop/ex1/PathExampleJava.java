@@ -12,7 +12,7 @@ import java.util.concurrent.ExecutionException;
 public class PathExampleJava extends HttpApp {
 
   @Override
-  protected Route route() {
+  protected Route routes() {
     return null;
   }
 

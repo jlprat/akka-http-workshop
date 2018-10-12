@@ -31,5 +31,5 @@ class BookShopHttp
     with CatalogManagerRoutes
     with ReviewRoutes {
 
-  override protected def route: Route = ???
+  override protected def routes: Route = ???
 }

@@ -4,7 +4,6 @@ import akka.actor.AbstractActor;
 import akka.actor.Props;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
-import akka.japi.pf.ReceiveBuilder;
 import io.github.jlprat.akka.http.workshop.java.bookstore.model.Book;
 
 import java.util.Collection;
@@ -206,8 +205,9 @@ public class CatalogActor extends AbstractActor {
         return Props.create(CatalogActor.class);
     }
 
-    public CatalogActor() {
-        receive(ReceiveBuilder
+    @Override
+    public Receive createReceive() {
+        return receiveBuilder()
                 .match(AddBook.class, addBook -> {
                     catalog.put(addBook.getBook().getIsbn(), addBook.getBook());
                     sender().tell(Success.getInstance(), self());
@@ -222,7 +222,7 @@ public class CatalogActor extends AbstractActor {
                     sender().tell(new Error(msg), self());
                 })
                 .match(QueryBook.class, query -> catalog.containsKey(query.getIsbn()), query ->
-                    sender().tell(new BookInfo(catalog.get(query.getIsbn())), self())
+                        sender().tell(new BookInfo(catalog.get(query.getIsbn())), self())
                 )
                 .match(QueryBook.class, query -> {
                     final String msg = "I don't know such isbn - " + query.getIsbn();
@@ -230,9 +230,8 @@ public class CatalogActor extends AbstractActor {
                     sender().tell(new Error(msg), self());
                 })
                 .match(ListCatalog.class, ignore ->
-                    sender().tell(new Catalog(catalog.values()), self())
+                        sender().tell(new Catalog(catalog.values()), self())
                 )
-                .build()
-        );
+                .build();
     }
 }

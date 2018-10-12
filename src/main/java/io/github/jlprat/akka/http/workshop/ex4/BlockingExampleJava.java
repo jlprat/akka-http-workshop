@@ -21,7 +21,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class BlockingExampleJava extends HttpApp {
     @Override
-    protected Route route() {
+    protected Route routes() {
         return null;
     }
 

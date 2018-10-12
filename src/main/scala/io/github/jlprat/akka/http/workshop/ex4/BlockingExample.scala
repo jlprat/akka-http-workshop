@@ -13,7 +13,7 @@ import scala.concurrent.Future
   */
 class BlockingExample extends HttpApp {
 
-  override protected def route: Route = ???
+  override protected def routes: Route = ???
 }
 
 object BlockingExample extends App {

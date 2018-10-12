@@ -15,21 +15,21 @@ public class IntroJavaTest extends JUnitRouteTest {
 
   @Test
   public void testGetHello() {
-    testRoute(intro.route()).run(HttpRequest.GET("/hello"))
+    testRoute(intro.routes()).run(HttpRequest.GET("/hello"))
       .assertStatusCode(StatusCodes.OK)
       .assertEntity("world!");
   }
 
   @Test
   public void testPostHello() {
-    testRoute(intro.route()).run(HttpRequest.POST("/hello"))
+    testRoute(intro.routes()).run(HttpRequest.POST("/hello"))
       .assertStatusCode(StatusCodes.OK)
       .assertEntity("world!");
   }
 
   @Test
   public void testPutHello() {
-    testRoute(intro.route()).run(HttpRequest.PUT("/hello"))
+    testRoute(intro.routes()).run(HttpRequest.PUT("/hello"))
       .assertStatusCode(StatusCodes.OK)
       .assertEntity("world!");
   }

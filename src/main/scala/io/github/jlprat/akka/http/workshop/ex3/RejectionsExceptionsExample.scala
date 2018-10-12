@@ -9,7 +9,7 @@ import akka.http.scaladsl.server._
   */
 class RejectionsExceptionsExample extends HttpApp {
 
-  override protected[ex3] def route: Route = ???
+  override protected[ex3] def routes: Route = ???
 }
 
 object RejectionsExceptionsExample extends App {

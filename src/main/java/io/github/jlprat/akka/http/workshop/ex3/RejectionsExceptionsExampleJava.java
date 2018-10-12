@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class RejectionsExceptionsExampleJava extends HttpApp {
     @Override
-    protected Route route() {
+    protected Route routes() {
         return null;
     }
 

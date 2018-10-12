@@ -12,7 +12,7 @@ import java.util.concurrent.ExecutionException;
 public class IntroJava extends HttpApp {
 
   @Override
-  protected Route route() {
+  protected Route routes() {
     return null;
   }
 

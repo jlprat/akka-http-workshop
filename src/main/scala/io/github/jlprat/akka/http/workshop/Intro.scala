@@ -7,7 +7,7 @@ import akka.http.scaladsl.server.{HttpApp, Route}
   * Created by @jlprat on 15/04/2017.
   */
 class Intro extends HttpApp {
-  override protected[workshop] def route: Route = ???
+  override protected[workshop] def routes: Route = ???
 }
 
 object Intro extends App {

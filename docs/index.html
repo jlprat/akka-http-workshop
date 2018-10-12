@@ -161,7 +161,7 @@
 
                 ```
                 new HttpApp {
-                  override protected def route: Route = path("hello") {
+                  override protected def routes: Route = path("hello") {
                     complete("world!")
                   }
                 }.startServer("localhost", 9000)

@@ -10,7 +10,7 @@ import org.scalatest.{ FlatSpec, Matchers }
   */
 class PathExampleSpec extends FlatSpec with ScalatestRouteTest with Matchers {
 
-  val routeToTest = new PathExample().route
+  val routeToTest = new PathExample().routes
 
   "PathExample" should "serve `/foo` paths without slash" in {
     Get("/foo") ~> routeToTest ~> check {

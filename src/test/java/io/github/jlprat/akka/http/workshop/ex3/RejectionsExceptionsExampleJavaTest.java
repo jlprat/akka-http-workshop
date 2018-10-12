@@ -15,28 +15,28 @@ public class RejectionsExceptionsExampleJavaTest extends JUnitRouteTest {
 
     @Test
     public void testPersonalized404() {
-        testRoute(rejectionsExceptionsExampleJava.route()).run(HttpRequest.GET("/not/existing"))
+        testRoute(rejectionsExceptionsExampleJava.routes()).run(HttpRequest.GET("/not/existing"))
                 .assertStatusCode(StatusCodes.NOT_FOUND)
                 .assertEntity("Nothing to see here!");
     }
 
     @Test
     public void testPersonalizedWrongMethod() {
-        testRoute(rejectionsExceptionsExampleJava.route()).run(HttpRequest.PUT("/onlyget"))
+        testRoute(rejectionsExceptionsExampleJava.routes()).run(HttpRequest.PUT("/onlyget"))
                 .assertStatusCode(StatusCodes.METHOD_NOT_ALLOWED)
                 .assertEntity("Have you tried with more conventional methods?");
     }
 
     @Test
     public void testPersonalizedArithmeticException() {
-        testRoute(rejectionsExceptionsExampleJava.route()).run(HttpRequest.GET("/zerodivision"))
+        testRoute(rejectionsExceptionsExampleJava.routes()).run(HttpRequest.GET("/zerodivision"))
                 .assertStatusCode(StatusCodes.INTERNAL_SERVER_ERROR)
                 .assertEntity("Do you math?");
     }
 
     @Test
     public void testDefaultForAnyOtherException() {
-        testRoute(rejectionsExceptionsExampleJava.route()).run(HttpRequest.GET("/crash"))
+        testRoute(rejectionsExceptionsExampleJava.routes()).run(HttpRequest.GET("/crash"))
                 .assertStatusCode(StatusCodes.INTERNAL_SERVER_ERROR)
                 .assertEntity("There was an internal server error.");
     }

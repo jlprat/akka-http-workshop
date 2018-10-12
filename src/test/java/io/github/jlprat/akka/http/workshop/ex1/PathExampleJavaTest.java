@@ -14,41 +14,41 @@ public class PathExampleJavaTest extends JUnitRouteTest {
 
   @Test
   public void testListenToFoo() {
-    testRoute(routeHolder.route()).run(HttpRequest.GET("/foo"))
+    testRoute(routeHolder.routes()).run(HttpRequest.GET("/foo"))
       .assertEntity("got foo")
       .assertStatusCode(StatusCodes.OK);
   }
 
   @Test
   public void testListenToFooTrailingSlash() {
-    testRoute(routeHolder.route()).run(HttpRequest.GET("/foo/"))
+    testRoute(routeHolder.routes()).run(HttpRequest.GET("/foo/"))
       .assertEntity("got foo")
       .assertStatusCode(StatusCodes.OK);
   }
 
   @Test
   public void testListenToNestedBar() {
-    testRoute(routeHolder.route()).run(HttpRequest.GET("/foo/bar"))
+    testRoute(routeHolder.routes()).run(HttpRequest.GET("/foo/bar"))
       .assertEntity("got bar")
       .assertStatusCode(StatusCodes.OK);
   }
 
   @Test
   public void testListenToOtherRoutes() {
-    testRoute(routeHolder.route()).run(HttpRequest.GET("/other"))
+    testRoute(routeHolder.routes()).run(HttpRequest.GET("/other"))
       .assertEntity("OK")
       .assertStatusCode(StatusCodes.OK);
   }
 
   @Test
   public void testListenToOtherRoutesOnlyOnGet() {
-    testRoute(routeHolder.route()).run(HttpRequest.POST("/other"))
+    testRoute(routeHolder.routes()).run(HttpRequest.POST("/other"))
             .assertStatusCode(StatusCodes.METHOD_NOT_ALLOWED);
   }
 
   @Test
   public void testRespondNotFound() {
-    testRoute(routeHolder.route()).run(HttpRequest.GET("/notExisting"))
+    testRoute(routeHolder.routes()).run(HttpRequest.GET("/notExisting"))
       .assertStatusCode(StatusCodes.NOT_FOUND);
 
   }

@@ -13,7 +13,7 @@ import java.util.concurrent.ExecutionException;
 public class ParameterExampleJava extends HttpApp {
 
     @Override
-    protected Route route() {
+    protected Route routes() {
         return null;
     }
 

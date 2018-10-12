@@ -9,7 +9,7 @@ import org.scalatest.{FlatSpec, Matchers}
   */
 class ParameterExampleSpec  extends FlatSpec with ScalatestRouteTest with Matchers {
 
-  val routeToTest = new ParameterExample().route
+  val routeToTest = new ParameterExample().routes
 
   "ParameterExample" should "process query parameters" in {
     Get("/listen?p1=foo&p2=bar") ~> routeToTest ~> check {
