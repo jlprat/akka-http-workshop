@@ -14,8 +14,6 @@ There are a total of 7 exercises focusing on different aspects of Akka HTTP:
 - Interacting with Akka Typed
 - Implications of Streaming
 
-To run them switch to the `exercises` branch!
- 
 ## How to run this code
 To run this code just head over the project main folder and run:
 ```
