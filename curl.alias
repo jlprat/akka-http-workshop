@@ -1,4 +1,0 @@
-curl -XPUT localhost:9000/catalog/admin/book -H "Content-Type: application/json" -d '{"isbn": "12345678", "title":"foz", "pages": 329, "author":{"name":"John Doe"}}' -u admin:LetMeIn
-
-curl -XPUT localhost:9000/review/book/12345678 -u John:LetMeIn -d "comment=Awesome&stars=4"
-
