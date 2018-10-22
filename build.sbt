@@ -11,7 +11,6 @@ libraryDependencies ++= Seq(
   // akka http
   "com.typesafe.akka" %% "akka-http"            % akkaHttpVersion,
   "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpVersion,
-  "com.typesafe.akka" %% "akka-http-jackson"    % akkaHttpVersion,
 
   // akka
   "com.typesafe.akka" %% "akka-stream"          % akkaVersion,
@@ -22,9 +21,8 @@ libraryDependencies ++= Seq(
 
   // testing
   "com.typesafe.akka" %% "akka-http-testkit"    % akkaHttpVersion % "test",
-  "org.scalatest"     %% "scalatest"            % "3.0.5"     % "test",
-  "junit"              % "junit"                % "4.12"      % "test",
-  "com.novocode"       % "junit-interface"      % "0.11"      % "test"
+  "com.typesafe.akka" %% "akka-stream-testkit"  % akkaVersion     % "test",
+  "org.scalatest"     %% "scalatest"            % "3.0.5"         % "test",
 )
 
 // As per Rob Norris
@@ -39,7 +37,7 @@ scalacOptions ++= Seq(
   "-language:implicitConversions",     // Allow definition of implicit functions called views
   "-unchecked",                        // Enable additional warnings where generated code depends on assumptions.
   "-Xcheckinit",                       // Wrap field accessors to throw an exception on uninitialized access.
-//  "-Xfatal-warnings",                  // Fail the compilation if there are any warnings.
+  "-Xfatal-warnings",                  // Fail the compilation if there are any warnings.
   "-Xfuture",                          // Turn on future language features.
   "-Xlint:adapted-args",               // Warn if an argument list is modified to match the receiver.
   "-Xlint:by-name-right-associative",  // By-name parameter of right associative operator.
@@ -77,6 +75,3 @@ scalacOptions ++= Seq(
 )
 
 scalacOptions in (Compile, console) --= Seq("-Ywarn-unused:imports", "-Xfatal-warnings")
-
-
-testOptions += Tests.Argument(TestFrameworks.JUnit, "-v")
