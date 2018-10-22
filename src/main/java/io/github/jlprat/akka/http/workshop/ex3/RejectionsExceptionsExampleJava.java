@@ -1,6 +1,5 @@
 package io.github.jlprat.akka.http.workshop.ex3;
 
-import akka.http.javadsl.model.StatusCodes;
 import akka.http.javadsl.server.*;
 
 import java.util.concurrent.ExecutionException;

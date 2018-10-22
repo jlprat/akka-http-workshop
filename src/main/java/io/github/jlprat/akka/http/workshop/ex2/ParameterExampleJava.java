@@ -1,7 +1,6 @@
 package io.github.jlprat.akka.http.workshop.ex2;
 
 import akka.http.javadsl.server.HttpApp;
-import akka.http.javadsl.server.PathMatchers;
 import akka.http.javadsl.server.Route;
 
 import java.util.concurrent.ExecutionException;

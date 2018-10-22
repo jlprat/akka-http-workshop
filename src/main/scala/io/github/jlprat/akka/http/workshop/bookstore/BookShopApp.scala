@@ -1,9 +1,8 @@
 package io.github.jlprat.akka.http.workshop.bookstore
 
-import akka.actor.{ActorRef, ActorSystem}
+import akka.actor.ActorSystem
 import akka.http.scaladsl.server.{HttpApp, Route}
 import akka.http.scaladsl.settings.ServerSettings
-import akka.util.Timeout
 import io.github.jlprat.akka.http.workshop.bookstore.actor.{CatalogActor, ReviewerActor}
 import io.github.jlprat.akka.http.workshop.bookstore.routes.{CatalogManagerRoutes, CatalogRoutes, ReviewRoutes}
 
