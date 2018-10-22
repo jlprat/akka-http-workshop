@@ -1,4 +1,4 @@
-package io.github.jlprat.akka.http.workshop.ex2
+package io.github.jlprat.akka.http.workshop.parameter
 
 import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.testkit.ScalatestRouteTest
@@ -7,7 +7,7 @@ import org.scalatest.{FlatSpec, Matchers}
 /**
   * Created by @jlprat on 20/04/2017.
   */
-class ParameterExampleSpec  extends FlatSpec with ScalatestRouteTest with Matchers {
+class ParameterExampleSpec extends FlatSpec with ScalatestRouteTest with Matchers {
 
   val routeToTest = new ParameterExample().routes
 

@@ -1,4 +1,4 @@
-package io.github.jlprat.akka.http.workshop.ex4
+package io.github.jlprat.akka.http.workshop.blocking
 
 import akka.http.scaladsl.server.{HttpApp, Route}
 

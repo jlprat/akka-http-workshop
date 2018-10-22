@@ -1,4 +1,4 @@
-package io.github.jlprat.akka.http.workshop.ex3
+package io.github.jlprat.akka.http.workshop.rejectionException
 
 import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.testkit.ScalatestRouteTest

@@ -1,4 +1,4 @@
-package io.github.jlprat.akka.http.workshop.ex3
+package io.github.jlprat.akka.http.workshop.rejectionException
 
 import akka.http.scaladsl.server._
 
@@ -8,7 +8,7 @@ import akka.http.scaladsl.server._
   */
 class RejectionsExceptionsExample extends HttpApp {
 
-  override protected[ex3] def routes: Route = ???
+  override protected[rejectionException] def routes: Route = ???
 }
 
 object RejectionsExceptionsExample extends App {

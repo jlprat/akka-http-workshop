@@ -1,4 +1,4 @@
-package io.github.jlprat.akka.http.workshop.ex1
+package io.github.jlprat.akka.http.workshop.path
 
 import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.server.Route

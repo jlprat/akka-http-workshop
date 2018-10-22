@@ -1,4 +1,4 @@
-package io.github.jlprat.akka.http.workshop.ex2
+package io.github.jlprat.akka.http.workshop.parameter
 
 import akka.http.scaladsl.server.{HttpApp, Route}
 
@@ -7,7 +7,7 @@ import akka.http.scaladsl.server.{HttpApp, Route}
   * Created by @jlprat on 20/04/2017.
   */
 class ParameterExample extends HttpApp {
-  override protected[ex2] def routes: Route = ???
+  override protected[parameter] def routes: Route = ???
 }
 
 object ParameterExample extends App {

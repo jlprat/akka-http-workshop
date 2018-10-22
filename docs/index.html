@@ -39,7 +39,7 @@
                 ## Workshop about Akka HTTP
                 <img src="images/logo-springernature.svg" alt="SpringerNature" style="border: 0; background-color: white; padding: 10px;">
                 * * *
-                ###### 24/04/2017 - Josep Prat - [@jlprat](https://github.com/jlprat)
+                ###### 30/10/2018 - Josep Prat - [@jlprat](https://github.com/jlprat)
             </script>
         </section>
         <section data-markdown>
@@ -47,7 +47,6 @@
                 # Contents
                 - Introduction
                 - Hands On with Demos
-                - Code Together
                 - Wrap Up
             </script>
         </section>
@@ -72,13 +71,13 @@
                     - Deal with Rejections
                     - Handling Exceptions
                     - Dealing with blocking
+                    - Interacting with Akka Typed
+                    - Implications of Streaming
             </script>
         </section>
         <section data-markdown>
             <script type="text/template">
                 # Contents
-                - Code Together
-                    - Book Store App
                 - Wrap Up
             </script>
         </section>
@@ -97,9 +96,10 @@
                 ## What is Akka HTTP?
 
                 - Used to be a module of [Akka](http://akka.io/)
-                - Now it lives under its own [repository](https://github.com/akka/akka-http)
+                - It lives under its own [repository](https://github.com/akka/akka-http)
                 - It can be seen as the successor of [Spray](http://spray.io/)
                 - Owned by the [community](https://github.com/akka/akka-meta/issues/27) and not only by the Akka Core Team
+                - Community members are also maintainers
             </script>
         </section>
         <section data-markdown>
@@ -108,11 +108,11 @@
 
                 [Github](https://github.com/akka/akka-http)
 
-                [Documentation](http://doc.akka.io/docs/akka-http/10.0.5/index.html)
+                [Documentation](http://doc.akka.io/docs/akka-http/current/index.html)
 
                 [Gitter Room](https://gitter.im/akka/akka/)
 
-                [User Group](https://groups.google.com/forum/#!forum/akka-user)
+                [Discuss Website](https://discuss.lightbend.com/c/akka/akka-http)
 
             </script>
         </section>
@@ -123,6 +123,7 @@
                 - Build on top of Akka Streams, which rely on Akka actors
                 - One must follow the same rules as in Akka, never block
                 - HTTP server is just a stream from a `Request` to a `Response`
+                - All actions are asynchronous
             </script>
         </section>
         <section data-markdown>
@@ -225,7 +226,7 @@
                     ## Understanding the Model
                     - Chunked
                         - Streamed as chunks
-                        - Data comes in chunks from Stream and length is unkown
+                        - Data comes in chunks from Stream and length is unknown
                     - CloseDelimited
                         - Streamed implicitly delimited by closing the connection
                         - Use for legacy systems
@@ -281,9 +282,7 @@
             <script type="text/template">
                 ## Hands On!
 
-                [Directives By Trait:Scala](http://doc.akka.io/docs/akka-http/current/scala/http/routing-dsl/directives/by-trait.html)
-
-                [Directives By Trait:Java](http://doc.akka.io/docs/akka-http/current/java/http/routing-dsl/directives/by-trait.html)
+                [Directives By Trait:Scala](https://doc.akka.io/docs/akka-http/current/routing-dsl/directives/by-trait.html?language=scala)
             </script>
         </section>
         <section data-markdown>
@@ -295,7 +294,7 @@
                 - `Segment`
                 - `IntNumber`, `LongNumber`...
                 - `PathEnd`
-                - "foo" / "bar" (obviously only in Scala)
+                - "foo" / "bar"
             </script>
         </section>
         <section data-markdown>
@@ -324,6 +323,11 @@
                 val responseFuture: Future[HttpResponse] =
                   Http().singleRequest(HttpRequest(uri = "http://akka.io"))
                 ```
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Hands on!
             </script>
         </section>
         <section data-markdown>
@@ -399,9 +403,31 @@
         </section>
         <section data-markdown>
             <script type="text/template">
-                ## Book Store App
+                ## Interacting with Akka Typed
 
-                Let's build a tiny simplistic Book Store.
+                - Akka Typed is the new version of the classic Actors
+                - No more Any => Unit
+                - Radical new API
+                - Same capabilities
+                - Benefits of types
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Hands on!
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Implications of Streaming
+                - A connection is not freed until the stream is either consumed or discarded
+                - Sending and receiving an entity takes time
+                - "Substream Source cannot be materialized more than once"
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Hands on!
             </script>
         </section>
         <section data-markdown>
@@ -412,6 +438,7 @@
                 - Never block
                 - Ideal for Streaming
                 - Natural Actor integration
+                - Consuming (or discarding) the Entity of a request is mandatory
             </script>
         </section>
         <section data-markdown>
@@ -431,7 +458,7 @@
             <script type="text/template">
                 # Thank you!
                 * * *
-                ###### 24/04/2017 - Josep Prat - [@jlprat](https://github.com/jlprat)
+                ###### 30/10/2018 - Josep Prat - [@jlprat](https://github.com/jlprat)
             </script>
         </section>
     </div>
