@@ -7,6 +7,9 @@ import akka.http.scaladsl.testkit.ScalatestRouteTest
 import io.github.jlprat.akka.http.workshop.actors.Model.{Author, Book}
 import org.scalatest.{FlatSpec, Matchers}
 
+/**
+  * Created by @jlprat on 24/10/2018.
+  */
 class CatalogRouteExampleTest extends FlatSpec with ScalatestRouteTest with Matchers {
 
 

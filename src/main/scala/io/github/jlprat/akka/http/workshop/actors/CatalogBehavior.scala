@@ -4,6 +4,10 @@ import akka.actor.typed.{ActorRef, Behavior}
 import akka.actor.typed.scaladsl.Behaviors
 import io.github.jlprat.akka.http.workshop.actors.Model.Book
 
+/**
+  * This class showcases a Akka Typed behavior
+  * Created by @jlprat on 24/04/2017.
+  */
 object CatalogBehavior {
 
   sealed trait Command

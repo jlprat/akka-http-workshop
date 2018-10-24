@@ -5,6 +5,9 @@ import akka.actor.typed.Behavior
 import io.github.jlprat.akka.http.workshop.actors.Model.{Author, Book}
 import org.scalatest.{FlatSpec, Matchers}
 
+/**
+  * Created by @jlprat on 24/10/2018.
+  */
 class CatalogBehaviorSpec extends FlatSpec with Matchers {
 
   val author = Author("Mercè Rodoreda")
