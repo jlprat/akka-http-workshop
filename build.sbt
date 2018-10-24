@@ -9,20 +9,21 @@ lazy val akkaVersion = "2.5.17"
 libraryDependencies ++= Seq(
 
   // akka http
-  "com.typesafe.akka" %% "akka-http"            % akkaHttpVersion,
-  "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpVersion,
+  "com.typesafe.akka" %% "akka-http"                % akkaHttpVersion,
+  "com.typesafe.akka" %% "akka-http-spray-json"     % akkaHttpVersion,
 
   // akka
-  "com.typesafe.akka" %% "akka-stream"          % akkaVersion,
-  "com.typesafe.akka" %% "akka-actor"           % akkaVersion,
+  "com.typesafe.akka" %% "akka-stream"              % akkaVersion,
+  "com.typesafe.akka" %% "akka-actor-typed"         % akkaVersion,
 
   // ftp
-  "commons-net"        % "commons-net"          % "3.6",
+  "commons-net"        % "commons-net"              % "3.6",
 
   // testing
-  "com.typesafe.akka" %% "akka-http-testkit"    % akkaHttpVersion % "test",
-  "com.typesafe.akka" %% "akka-stream-testkit"  % akkaVersion     % "test",
-  "org.scalatest"     %% "scalatest"            % "3.0.5"         % "test",
+  "com.typesafe.akka" %% "akka-http-testkit"        % akkaHttpVersion % "test",
+  "com.typesafe.akka" %% "akka-stream-testkit"      % akkaVersion     % "test",
+  "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaVersion     % "test",
+  "org.scalatest"     %% "scalatest"                % "3.0.5"         % "test",
 )
 
 // As per Rob Norris
