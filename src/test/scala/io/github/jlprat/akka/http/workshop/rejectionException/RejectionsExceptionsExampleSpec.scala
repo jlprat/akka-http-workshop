@@ -26,7 +26,7 @@ class RejectionsExceptionsExampleSpec extends FlatSpec with ScalatestRouteTest w
   }
 
   it should "provide special message when arithmetic exceptions" in {
-    Get("/zerodivision") ~> routeToTest ~> check {
+    Get("/division/2/0") ~> routeToTest ~> check {
       status shouldBe StatusCodes.InternalServerError
       responseAs[String] shouldBe "Do you math?"
     }
