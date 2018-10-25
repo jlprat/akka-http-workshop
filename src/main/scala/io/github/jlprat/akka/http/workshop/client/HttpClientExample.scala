@@ -1,5 +1,7 @@
 package io.github.jlprat.akka.http.workshop.client
 
+import akka.actor.ActorSystem
+
 import scala.concurrent.Future
 
 /**
@@ -8,6 +10,6 @@ import scala.concurrent.Future
   */
 object HttpClientExample {
 
-  def getPage(uri: String): Future[String] = ???
+  def getPage(uri: String)(implicit system: ActorSystem): Future[String] = ???
 
 }

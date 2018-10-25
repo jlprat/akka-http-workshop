@@ -19,15 +19,15 @@ class CatalogRouteExample(override val catalogBehavior: ActorRef[CatalogBehavior
 
 object CatalogRouteExample {
 
+  trait JsonProtocol extends SprayJsonSupport with DefaultJsonProtocol {
+    implicit val authorFormat = jsonFormat1(Author)
+    implicit val bookFormat = jsonFormat4(Book)
+  }
+
   trait CatalogRoute extends Directives with JsonProtocol {
 
     val catalogBehavior: ActorRef[CatalogBehavior.Command]
     val catalogRoute: Route = path("???"){complete("")}
-  }
-
-  trait JsonProtocol extends SprayJsonSupport with DefaultJsonProtocol {
-    implicit val authorFormat = jsonFormat1(Author)
-    implicit val bookFormat = jsonFormat4(Book)
   }
 
   def main(args: Array[String]): Unit = {
