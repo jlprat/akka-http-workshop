@@ -1,6 +1,11 @@
 package io.github.jlprat.akka.http.workshop.blocking
 
+import akka.http.scaladsl.model.ContentTypes.`text/plain(UTF-8)`
+import akka.http.scaladsl.model.HttpEntity
 import akka.http.scaladsl.server.{HttpApp, Route}
+import org.apache.commons.net.ftp.FTPClient
+
+import scala.concurrent.{ExecutionContext, Future}
 
 /**
   * This class showcases how to deal with blocking
@@ -8,7 +13,24 @@ import akka.http.scaladsl.server.{HttpApp, Route}
   */
 class BlockingExample extends HttpApp {
 
-  override protected def routes: Route = ???
+  private implicit lazy val blockingDispatcher: ExecutionContext = systemReference.get.dispatchers.lookup("my-blocking-dispatcher")
+
+  override protected def routes: Route = path("files") {
+    complete(
+      Future {
+        val ftp = new FTPClient
+        ftp.connect("ftp.fu-berlin.de")
+        ftp.login("anonymous", "")
+        ftp.changeWorkingDirectory("doc/o-reilly")
+        val files = ftp.listFiles()
+        ftp.disconnect()
+        HttpEntity(
+          `text/plain(UTF-8)`,
+          files.map(_.getName).mkString("\n")
+        )
+      }
+    )
+  }
 }
 
 object BlockingExample extends App {
