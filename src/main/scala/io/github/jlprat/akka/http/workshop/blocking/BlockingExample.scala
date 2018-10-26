@@ -15,22 +15,27 @@ class BlockingExample extends HttpApp {
 
   private implicit lazy val blockingDispatcher: ExecutionContext = systemReference.get.dispatchers.lookup("my-blocking-dispatcher")
 
-  override protected def routes: Route = path("files") {
-    complete(
-      Future {
-        val ftp = new FTPClient
-        ftp.connect("ftp.fu-berlin.de")
-        ftp.login("anonymous", "")
-        ftp.changeWorkingDirectory("doc/o-reilly")
-        val files = ftp.listFiles()
-        ftp.disconnect()
-        HttpEntity(
-          `text/plain(UTF-8)`,
-          files.map(_.getName).mkString("\n")
-        )
-      }
-    )
-  }
+  override protected def routes: Route = concat(
+    path("files") {
+      complete(
+        Future {
+          val ftp = new FTPClient
+          ftp.connect("ftp.fu-berlin.de")
+          ftp.login("anonymous", "")
+          ftp.enterLocalPassiveMode()
+          ftp.changeWorkingDirectory("doc/o-reilly")
+          val files = ftp.listFiles()
+          ftp.disconnect()
+          HttpEntity(
+            `text/plain(UTF-8)`,
+            files.map(_.getName).mkString("\n")
+          )
+        }
+      )
+    },
+    path("status") {
+      complete("Alive")
+    })
 }
 
 object BlockingExample extends App {
