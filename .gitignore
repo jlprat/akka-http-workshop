@@ -28,3 +28,6 @@ target
 .*.swp
 *.vim
 .ensime*
+
+#Bloop
+.bloop
