@@ -5,14 +5,14 @@ This is the repository for the Akka HTTP workshop.
 The slides are under the `docs` folder, the main folder contains the sbt project with the examples and exercises shown in the slides.
 
 ## Exercises
-There are a total of 7 exercises focusing on different aspects of Akka HTTP:
+There are a total of 8 exercises focusing on different aspects of Akka HTTP:
 - Composing Routes
 - Processing parameters
 - Handling Rejections and Exceptions
 - HTTP Client
 - How to deal with blocking code
 - Interacting with Akka Typed
-- Implications of Streaming
+- Implications of Streaming (I and II)
 
 You can switch to the `solution` branch to see an implementation of the exercises.
 
